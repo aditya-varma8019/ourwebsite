@@ -7,8 +7,10 @@ const EventForm = () => {
     name: "",
     venue: "",
     description: "",
-    time: "",
     date: "",
+    isLateNight: "",
+    budget: "",
+    duration: "",
   });
 
   const handleChange = (e) => {
@@ -26,8 +28,10 @@ const EventForm = () => {
           name: event.name,
           venue: event.venue,
           description: event.description,
-          time: event.time,
           date: event.date,
+          isLateNight: event.isLateNight,
+          budget: event.budget,
+          duration: event.duration,
         })
         .then((res) => {
           alert("Successfully created event");
@@ -73,21 +77,44 @@ const EventForm = () => {
           ></textarea>
         </div>
         <div>
-          <label>Time:</label>
-          <input
-            type="time"
-            name="time"
-            value={event.time}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
           <label>Date:</label>
           <input
             type="date"
             name="date"
             value={event.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Is Event Late Night:</label>
+          <select
+            name="isLateNight"
+            value={event.isLateNight}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div>
+          <label>Budget:</label>
+          <input
+            type="number"
+            name="budget"
+            value={event.budget}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Duration:</label>
+          <input
+            type="text"
+            name="duration"
+            value={event.duration}
             onChange={handleChange}
             required
           />
