@@ -3,9 +3,8 @@ import axios from 'axios';
 import './approval.css';
 import {useNavigate} from 'react-router-dom';
 
-const ApprovalRequestsTable = () => {
+const ADean = () => {
     const [approvalRequests, setApprovalRequests] = useState([]);
-    
     const navigate = useNavigate();
     const getRequestData = async () => {
         try {
@@ -16,17 +15,17 @@ const ApprovalRequestsTable = () => {
         }
     };
 
-
     useEffect(() => {
         getRequestData();
     }, [approvalRequests]);
 
     const handleApprove = async (name) => {
         try {
-            const response = await axios.put("http://localhost:5000/api/events/toapprove/1", { name });
+            const response = await axios.put("http://localhost:5000/api/events/toapprove/2", { name });
             if (!response.ok) {
                 throw new Error('Failed to update approval status');
             }
+            getRequestData();
             // console.log(`Request with NAME ${name} approved`);
         } catch (error) {
             console.error('Error approving request:', error.message);
@@ -35,7 +34,7 @@ const ApprovalRequestsTable = () => {
 
     const handleReject = async (name) => {
         try {
-            const response = await axios.put("http://localhost:5000/api/events/toreject/1", { name });
+            const response = await axios.put("http://localhost:5000/api/events/toreject/2", { name });
             if (!response.ok) {
                 throw new Error('Failed to update approval status');
             }
@@ -50,7 +49,7 @@ const ApprovalRequestsTable = () => {
 
     return (
         <div>
-            <h1 className="dashboard-heading">Faculty DashBoard</h1>
+            <h1 className="dashboard-heading">Associate Dean DashBoard</h1>
             <div className="approval-requests-container">
                 {/* Pending requests section */}
                 <div className="approval-requests-table">
@@ -70,7 +69,7 @@ const ApprovalRequestsTable = () => {
                         </thead>
                         <tbody>
                             {approvalRequests.map(request => (
-                                request.isPending1 && (
+                                request.isPending2 && request.isApproved1 && (
                                     <tr key={request.id} className="table-row">
                                         <td className="table-cell name-underline" onClick={()=>navigate(`/eventpage/${request.name}`)}>{request.name}</td>
                                         <td className="table-cell">{request.description}</td>
@@ -108,7 +107,7 @@ const ApprovalRequestsTable = () => {
                         </thead>
                         <tbody>
                             {approvalRequests.map(request => (
-                                !request.isPending1 && (
+                                !request.isPending2 && request.isApproved1 && (
                                     <tr key={request.id} className="table-row">
                                         <td className="table-cell name-underline" onClick={()=>navigate(`/eventpage/${request.name}`)}>{request.name}</td>
                                         <td className="table-cell">{request.description}</td>
@@ -119,10 +118,10 @@ const ApprovalRequestsTable = () => {
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
 
-                                            {request.isApproved1 && (
+                                            {request.isApproved && (
                                                 <button className="action-button approve-button-green">{"Approved"}</button>
                                             )}
-                                            {!request.isPending1 && !request.isApproved1 && (
+                                            {!request.isPending && !request.isApproved && (
                                                 <button className="action-button approve-button-red">{"Rejected"}</button>
                                             )}
 
@@ -138,4 +137,4 @@ const ApprovalRequestsTable = () => {
     );
 };
 
-export default ApprovalRequestsTable;
+export default ADean;

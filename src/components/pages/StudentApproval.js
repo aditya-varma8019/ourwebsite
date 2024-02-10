@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './studentapp.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import "./singleReq.css"
 
 const StudentRequestsTable = () => {
+    const navigate = useNavigate();
+    const handleClick = (request) => {
+        navigate(`/singlereq/${request.name}`);
+    }
+
     const [approvalRequests, setApprovalRequests] = useState([]);
 
     const getRequestData = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/events');
             setApprovalRequests(response.data);
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -18,9 +25,6 @@ const StudentRequestsTable = () => {
     useEffect(() => {
         getRequestData();
     }, []);
-
-
-
 
     return (
         <div>
@@ -50,10 +54,28 @@ const StudentRequestsTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {approvalRequests.map(request => (
+                            {approvalRequests.map(request => {
 
+                                let x = 0;
+                                let y = request.numberOfPermissions;
+
+                                let den;
+                                if(y === 3) den = 3;
+                                else if(y === 4) den = 4;
+                                else if(y === 5) den = 4;
+                                else if(y === 6) den = 5;
+                                else if(y === 7) den = 5;
+
+                                if (request.isApproved1) x++;
+                                if (request.isApproved2) x++;
+                                if (request.isApproved3) x++;
+                                if (request.isApproved4) x++;
+                                if (request.isApproved5) x++;
+                                
+                                console.log(x, y);
+                                return (
                                 <tr key={request.id} className="table-row">
-                                    <td className="table-cell">{request.name}</td>
+                                    <td className="table-cell name-underline" onClick={()=>navigate(`/eventpage/${request.name}`)}>{request.name}</td>
                                     <td className="table-cell">{request.description}</td>
                                     <td className="table-cell">{(request.date).substring(0, 10)}</td>
                                     <td className="table-cell">{request.duration}</td>
@@ -66,20 +88,21 @@ const StudentRequestsTable = () => {
 
 
 
-                                        {request.isPending && (
-                                            <button className="action-button approve-button-blue">{"Pending"}</button>
-                                        )}
-                                        {request.isApproved && (
-                                            <button className="action-button approve-button-green">{"Approved"}</button>
-                                        )}
-                                        {!request.isPending && !request.isApproved && (
-                                            <button className="action-button approve-button-red">{"Rejected"}</button>
-                                        )}
+                                        {/* {(x < y) && (
+                                            <button className="action-button approve-button-blue" onClick={() => handleClick(request)}>{`Pending +( ${x / den})`}</button>
+                                        )} */}
+                                        {/* {(x === den) && ( */}
+                                            <button className="action-button approve-button-green" onClick={() => handleClick(request)}>{`View (${x}/${den})`}</button>
+                                        {/* )} */}
+                                        
+                                        {/* {!request.isPending && !request.isApproved && (
+                                            <button className="action-button approve-button-red" onClick={() => handleClick(request)}>{`Rejected ( ${x / den})`}</button>
+                                        )} */}
 
 
                                     </td>
-                                </tr>
-                            ))}
+                                </tr>);
+                            })}
                         </tbody>
                     </table>
                 </div>

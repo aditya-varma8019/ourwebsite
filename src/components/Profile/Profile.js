@@ -13,6 +13,10 @@ const EventForm = () => {
     isLateNight: "",
     budget: "",
     duration: "",
+    clubName : "",
+    speakerList: "",
+    sponsorList: "",
+    remarks : ""
   });
 
   const handleChange = (e) => {
@@ -26,20 +30,29 @@ const EventForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here, you can send 'event' to backend or perform any other action
-    axios.post("http://localhost:5000/api/events/create", {
-      name: event.name,
-      venue: event.venue,
-      description: event.description,
-      date: event.date,
-      isLateNight: event.isLateNight,
-      budget: event.budget,
-      duration: event.duration,
-    })
+    axios
+      .post("http://localhost:5000/api/events/create", {
+        name: event.name,
+        venue: event.venue,
+        description: event.description,
+        date: event.date,
+        isLateNight: event.isLateNight,
+        budget: event.budget,
+        duration: event.duration,
+        clubName : event.clubName,
+        speakerList : event.speakerList,
+        sponsorList : event.sponsorList,
+      })
       .then((res) => {
+        // console.log(res);
         alert("Successfully created event");
         navigate("/student", { replace: true });
       })
       .catch((error) => {
+        if(error.response.data.message === "Venue already booked for this date") {
+          alert("Venue already booked for this date");
+        }
+        else 
         console.error("Error:", error.response.data.message);
         // Handle error, perhaps set some error state
       });
@@ -61,13 +74,15 @@ const EventForm = () => {
         </div>
         <div>
           <label>Venue:</label>
-          <input
-            type="text"
+          <select
             name="venue"
             value={event.venue}
             onChange={handleChange}
-            required
-          />
+            required>
+            <option value="">Select</option>
+            <option value="Auditorium">Auditorium</option>
+            <option value="CRC">CRC</option>
+          </select>
         </div>
         <div>
           <label>Description:</label>
@@ -75,8 +90,7 @@ const EventForm = () => {
             name="description"
             value={event.description}
             onChange={handleChange}
-            required
-          ></textarea>
+            required></textarea>
         </div>
         <div>
           <label>Date:</label>
@@ -94,8 +108,7 @@ const EventForm = () => {
             name="isLateNight"
             value={event.isLateNight}
             onChange={handleChange}
-            required
-          >
+            required>
             <option value="">Select</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -120,7 +133,45 @@ const EventForm = () => {
             onChange={handleChange}
             required
           />
+
+
         </div>
+        <div>
+          <label>Club Name:</label>
+          <select
+            name="clubName"
+            value={event.clubName}
+            onChange={handleChange}
+            required>
+            <option value="">Select</option>
+            <option value="Axis">Axis</option>
+            <option value="E-Cell">E-Cell</option>
+            <option value="ACM">ACM</option>
+            <option value="IV-Labs">IV-Labs</option>
+            <option value="Halla Bol">Halla Bol</option>
+          </select>
+
+        </div>
+
+         <div>
+          <label>Speaker List:</label>
+          <textarea
+            name="speakerList"
+            value={event.speakerList}
+            onChange={handleChange}
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label>Sponsor List:</label>
+          <textarea
+            name="sponsorList"
+            value={event.sponsorList}
+            onChange={handleChange}
+            required
+          ></textarea>
+        </div>
+
         <button type="submit">Create Event</button>
       </form>
     </div>

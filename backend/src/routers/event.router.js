@@ -1,12 +1,13 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
 import { EventModel } from "../models/event.model.js";
+import { VenueModel } from "../models/venue.model.js";
 
 const router = Router();
 
 router.post("/create", asyncHandler(async (req, res) => {
 
-    const { name, venue, description, date, isLateNight, budget, duration } = req.body;
+    const { name, venue, description, date, isLateNight, budget, duration, clubName, speakerList, sponsorList } = req.body;
 
     const event = await EventModel.findOne({ name });
     if (event) {
@@ -14,9 +15,67 @@ router.post("/create", asyncHandler(async (req, res) => {
         throw new Error("Event already exists");
     }
 
-    const createdEvent = await EventModel.create({ name, venue, description, date, isLateNight, budget, duration});
+    const dbVenue = await VenueModel.findOne({ name: venue }); 
+    if (!dbVenue) {
+        res.status(400);
+        throw new Error("Venue does not exist");
+    }
+
+    const arr = dbVenue.bookedFor;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === date) {
+            res.status(400).json({message: "Venue already booked for this date"});
+            throw new Error("Venue already booked for this date");
+        }
+    }
+    
+    dbVenue.bookedFor.push(date);
+    await dbVenue.save();    
+
+    let numberOfPermissions = 3;
+    if(!isLateNight && venue === "CRC"){
+        numberOfPermissions = 4;
+    }
+    else if(!isLateNight && venue === "Auditorium"){
+        numberOfPermissions = 5;
+    }
+    else if(isLateNight && venue === "CRC"){
+        numberOfPermissions = 6;
+    }
+    else if(isLateNight && venue === "Auditorium"){
+        numberOfPermissions = 7;
+    }
+
+    const createdEvent = await EventModel.create({ name, venue, description, date, isLateNight, budget, duration, numberOfPermissions, clubName, speakerList, sponsorList});
     
     res.status(201).json(createdEvent);
+}));
+
+router.put("/update", asyncHandler(async (req, res) => {
+    const { name, venue, description, date, isLateNight, budget, duration, clubName, speakerList, sponsorList,remarks } = req.body;
+
+    const event = await EventModel.findOne({ name });
+    if (!event) {
+        res.status(400);
+        throw new Error("Event does not exist");
+    }
+
+    let numberOfPermissions = 3;
+    if(!isLateNight && venue === "CRC"){
+        numberOfPermissions = 4;
+    }
+    else if(!isLateNight && venue === "Auditorium"){
+        numberOfPermissions = 5;
+    }
+    else if(isLateNight && venue === "CRC"){
+        numberOfPermissions = 6;
+    }
+    else if(isLateNight && venue === "Auditorium"){
+        numberOfPermissions = 7;
+    }
+
+    const updatedEvent = await EventModel.findOneAndUpdate({ name }, { venue, description, date, isLateNight, budget, duration, numberOfPermissions, clubName, speakerList, sponsorList,remarks }, { new: true });
+    res.json(updatedEvent);
 }));
 
 // @desc Get all events
@@ -27,38 +86,55 @@ router.get("/", asyncHandler(async (req, res) => {
     res.json(events);
 }));
 
-// @desc Get single event by id
-// @route GET /api/events/:id
+
+// @desc Update event
+// @route PUT /api/events/:id
 // @access Public
-router.get("/:id", asyncHandler(async (req, res) => {
-    const event = await EventModel.findById(req.params.id);
+router.put("/toapprove/:num", asyncHandler(async (req, res) => {
+    const name = req.body.name;
+    const num = req.params.num;
+
+    const fieldToUpdate = `isApproved${num}`;
+    const fieldToUpdate2 = `isPending${num}`;
+
+    // Set the values for update
+    const updateValues = {
+        [fieldToUpdate]: true, // Assuming you want to set it to true
+        [fieldToUpdate2]: false // Assuming you want to set 'isPending' to false
+    };
+
+    const event = await EventModel.findOneAndUpdate({ name }, { $set: updateValues }, { new: true });
+    res.json(event);
+}));
+
+router.put("/toreject/:num", asyncHandler(async (req, res) => {
+    const name = req.body.name;
+    const num = req.params.num;
+    
+    const fieldToUpdate = `isApproved${num}`;
+    const fieldToUpdate2 = `isPending${num}`;
+
+    // Set the values for update
+    const updateValues = {
+        [fieldToUpdate]: false, // Assuming you want to set it to true
+        [fieldToUpdate2]: false // Assuming you want to set 'isPending' to false
+    };
+
+    // Update the document
+    const event = await EventModel.findOneAndUpdate({ name }, { $set: updateValues }, { new: true });
+
+    res.json(event);
+}));
+
+router.get("/getByName/:name", asyncHandler(async (req, res) => {
+    const {name} = req.params
+    const event = await EventModel.findOne({ name });
     if (event) {
         res.json(event);
     } else {
         res.status(404);
         throw new Error("Event not found");
     }
-}));
-
-// @desc Update event
-// @route PUT /api/events/:id
-// @access Public
-router.put("/toapprove", asyncHandler(async (req, res) => {
-    const name = req.body.name;
-    const isApproved = true;
-    const isPending = false;
-    const event = await EventModel.findOneAndUpdate({ name }, { $set: { isApproved }}, { new: true  });
-    const event2 = await EventModel.findOneAndUpdate({ name }, { $set: { isPending }}, { new: true  });
-    res.json(event2);
-}));
-
-router.put("/toreject", asyncHandler(async (req, res) => {
-    const name = req.body.name;
-    const isApproved = false;
-    const isPending = false;
-    const event = await EventModel.findOneAndUpdate({ name }, { $set: { isApproved }}, { new: true  });
-    const event2 = await EventModel.findOneAndUpdate({ name }, { $set: { isPending }}, { new: true  });
-    res.json(event2);
 }));
 
 export default router;

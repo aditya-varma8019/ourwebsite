@@ -1,0 +1,36 @@
+/* EventDetails.css */
+
+.event-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 24px; /* Increase font size */
+    background-color: #f0f0f0; /* Add background color */
+}
+
+.event-details-card {
+    width: 80%; /* Set width to 80% of the viewport */
+    max-width: 800px; /* Set maximum width */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Increase box shadow */
+    background-color: #ffffff;
+}
+
+.event-details-title {
+    font-size: 36px; /* Increase title font size */
+    font-weight: bold;
+    margin-bottom: 20px; /* Increase margin */
+}
+
+.event-details-info p {
+    margin: 10px 0; /* Increase paragraph margin */
+}
+
+.loading-message {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    font-size: 20px; /* Increase loading message font size */
+}
