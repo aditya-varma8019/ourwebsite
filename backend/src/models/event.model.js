@@ -5,6 +5,9 @@ const eventSchema = new Schema({
     venue: { type: String, required: true },
     description: { type: String, default: "" },
     date: { type: Date, required: true },
+    isLateNight: { type: Boolean, default: false },
+    budget: { type: Number, required: true },
+    duration: { type: String, required: true },
     isApproved: { type: Boolean, default: false },
     isPending: { type: Boolean, default: true },
 },{
