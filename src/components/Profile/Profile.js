@@ -148,7 +148,7 @@ const EventForm = () => {
             <option value="E-Cell">E-Cell</option>
             <option value="ACM">ACM</option>
             <option value="IV-Labs">IV-Labs</option>
-            <option value="Halla Bol">Halla Bol</option>
+            <option value="HallaBol">HallaBol</option>
           </select>
 
         </div>
