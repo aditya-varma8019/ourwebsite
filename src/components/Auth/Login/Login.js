@@ -53,7 +53,7 @@ const Login = ({ setUserState }) => {
                     if (res.data.message === "Login successful") {
                         setUserState(res.data.user);                        
                     }
-                    navigate("/profile");
+                    navigate("/student");
                 })
                 .catch((error) => {
                     console.error("Login failed:", error);

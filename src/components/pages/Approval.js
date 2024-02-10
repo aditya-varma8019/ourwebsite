@@ -25,7 +25,7 @@ const ApprovalRequestsTable = () => {
                 throw new Error('Failed to update approval status');
             }
             getRequestData();
-            console.log(`Request with NAME ${name} approved`);
+            // console.log(`Request with NAME ${name} approved`);
         } catch (error) {
             console.error('Error approving request:', error.message);
         }
@@ -38,7 +38,7 @@ const ApprovalRequestsTable = () => {
                 throw new Error('Failed to update approval status');
             }
             getRequestData();
-            console.log(`Request with NAME ${name} rejected`);
+            // console.log(`Request with NAME ${name} rejected`);
         } catch (error) {
             console.error('Error rejecting request:', error.message);
         }
@@ -48,7 +48,7 @@ const ApprovalRequestsTable = () => {
 
     return (
         <div>
-            <h1 className="dashboard-heading">DashBoard</h1>
+            <h1 className="dashboard-heading">Faculty DashBoard</h1>
             <div className="approval-requests-container">
                 {/* Pending requests section */}
                 <div className="approval-requests-table">
@@ -72,7 +72,7 @@ const ApprovalRequestsTable = () => {
                                     <tr key={request.id} className="table-row">
                                         <td className="table-cell">{request.name}</td>
                                         <td className="table-cell">{request.description}</td>
-                                        <td className="table-cell">{(request.date).substring(0,10)}</td>
+                                        <td className="table-cell">{(request.date).substring(0, 10)}</td>
                                         <td className="table-cell">{request.duration}</td>
                                         <td className="table-cell">{request.venue}</td>
                                         <td className="table-cell">{request.isLateNight ? 'Yes' : 'No'}</td>
@@ -110,15 +110,20 @@ const ApprovalRequestsTable = () => {
                                     <tr key={request.id} className="table-row">
                                         <td className="table-cell">{request.name}</td>
                                         <td className="table-cell">{request.description}</td>
-                                        <td className="table-cell">{(request.date).substring(0,10)}</td>
+                                        <td className="table-cell">{(request.date).substring(0, 10)}</td>
                                         <td className="table-cell">{request.duration}</td>
                                         <td className="table-cell">{request.venue}</td>
                                         <td className="table-cell">{request.isLateNight ? 'Yes' : 'No'}</td>
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
 
-                                            {/* <button className="action-button approve-button" onClick={() => handleApprove(request.id)}>Approve</button>
-                                        <button className="action-button reject-button" onClick={() => handleReject(request.id)}>Reject</button> */}
+                                            {request.isApproved && (
+                                                <button className="action-button approve-button-green">{"Approved"}</button>
+                                            )}
+                                            {!request.isPending && !request.isApproved && (
+                                                <button className="action-button approve-button-red">{"Rejected"}</button>
+                                            )}
+
                                         </td>
                                     </tr>
                                 )

@@ -22,6 +22,7 @@ code {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  margin-top: 15px;
 }
 
 /* Rest of the styles remain unchanged */
@@ -84,10 +85,22 @@ code {
   background-position: right center;
 }
 
-.approve-button {
+.approve-button-green {
   color: white;
   margin-right: 5px;
   background-color: #2d955d;
+  /* background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); */
+}
+.approve-button-red {
+  color: white;
+  margin-right: 5px;
+  background-color: red;
+  /* background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); */
+}
+.approve-button-blue {
+  color: white;
+  margin-right: 5px;
+  background-color: rgb(173, 191, 230);
   /* background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); */
 }
 
@@ -120,6 +133,7 @@ code {
   }
 
   .action-button {
+    margin-bottom: 100px;
     padding: 6px 12px;
   }
 }
@@ -142,6 +156,12 @@ code {
 }
 
 a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
+}
+
+.dashboard-heading {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
 }
