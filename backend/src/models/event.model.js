@@ -20,6 +20,7 @@ const eventSchema = new Schema({
     isPending4: { type: Boolean, default: true },
     isPending5: { type: Boolean, default: true },
     isPending6: { type: Boolean, default: true },
+    isCompleted: { type: Boolean, default: false },
     numberOfPermissions: { type: Number, default: 0 },
     clubName : {type : String, required : true},
     speakerList: { type: String }, // Changed to String type

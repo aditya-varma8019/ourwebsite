@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './approval.css';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 const ApprovalRequestsTable = () => {
     const [approvalRequests, setApprovalRequests] = useState([]);
+    const {clubName} = useParams();
     
     const navigate = useNavigate();
     const getRequestData = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/events');
-            setApprovalRequests(response.data);
+            if(!clubName)
+            {
+                const response = await axios.get('http://localhost:5000/api/events');
+                setApprovalRequests(response.data);
+            }
+            else {
+                const response = await axios.get(`http://localhost:5000/api/events/getByClub/${clubName}`);
+                setApprovalRequests(response.data);
+            }            
         } catch (error) {
             console.error('Error:', error);
         }
@@ -19,7 +27,7 @@ const ApprovalRequestsTable = () => {
 
     useEffect(() => {
         getRequestData();
-    }, [approvalRequests]);
+    }, [approvalRequests, clubName]);
 
     const handleApprove = async (name) => {
         try {
@@ -32,6 +40,7 @@ const ApprovalRequestsTable = () => {
             console.error('Error approving request:', error.message);
         }
     };
+
 
     const handleReject = async (name) => {
         try {
@@ -46,11 +55,20 @@ const ApprovalRequestsTable = () => {
         }
     };
 
-
+    
 
     return (
         <div>
             <h1 className="dashboard-heading">Faculty DashBoard</h1>
+            <div class="button-container">
+                <button onClick={() => { navigate('/faculty'); }}>ALL</button>
+                <button onClick={() => { navigate('/faculty/ACM'); }}>ACM</button>
+                <button onClick={() => { navigate('/faculty/HallaBol'); }}>Halla Bol</button>
+                <button onClick={() => { navigate('/faculty/Axis'); }}>AXIS</button>
+                <button onClick={() => { navigate('/faculty/E-Cell'); }}>E-Cell</button>
+                <button onClick={() => { navigate('/faculty/IV-Labs'); }}>IV-Labs</button>
+            </div>
+
             <div className="approval-requests-container">
                 {/* Pending requests section */}
                 <div className="approval-requests-table">

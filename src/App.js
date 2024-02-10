@@ -26,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/newevent" element={<Profile />} />
         <Route path='/faculty' element={<ApprovalRequestsTable />} />
+        <Route path='/faculty/:clubName' element={<ApprovalRequestsTable />} />
         <Route path="/letter" element={<Home/>} />
         <Route path='/generateletter' element={<Letter/>} />
         <Route path='/student' element={<StudentRequestsTable />} />
