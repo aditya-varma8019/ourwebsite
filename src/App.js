@@ -1,12 +1,12 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Layout from './components/Layout/Layout';
-import Login from "./components/Login/Login.js";
-import Register from "./components/Register/Register.js";
+import Login from './components/Auth/Login/Login'
+import Register from './components/Auth/Register/Register'
 function App() {
   return (
     <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         {/* <Route path' */}
       </Routes>
   );
