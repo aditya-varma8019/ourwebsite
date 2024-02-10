@@ -4,6 +4,7 @@ import registerstyle from "./Register.module.css";
 import axios from "axios";
 
 import { useNavigate, NavLink } from "react-router-dom";
+
 const Register = () => {
   const navigate = useNavigate();
 
@@ -24,50 +25,57 @@ const Register = () => {
     });
   };
 
-  // const validateForm = (values) => {
-  //   const error = {};
-  //   const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
-  //   if (!values.name) {
-  //     error.fname = "First Name is required";
-  //   }
-  //   if (!values.email) {
-  //     error.email = "Email is required";
-  //   } else if (!regex.test(values.email)) {
-  //     error.email = "This is not a valid email format!";
-  //   }
-  //   if (!values.password) {
-  //     error.password = "Password is required";
-  //   } else if (values.password.length < 4) {
-  //     error.password = "Password must be more than 4 characters";
-  //   } else if (values.password.length > 10) {
-  //     error.password = "Password cannot exceed more than 10 characters";
-  //   }
-  //   if (!values.cpassword) {
-  //     error.cpassword = "Confirm Password is required";
-  //   } else if (values.cpassword !== values.password) {
-  //     error.cpassword = "Confirm password and password should be same";
-  //   }
-  //   return error;
-  // };
+  const validateForm = (values) => {
+    const error = {};
+    const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.name) {
+      error.name = "First Name is required";
+    }
+    if (!values.email) {
+      error.email = "Email is required";
+    } else if (!regex.test(values.email)) {
+      error.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      error.password = "Password is required";
+    } else if (values.password.length < 4) {
+      error.password = "Password must be more than 4 characters";
+    } else if (values.password.length > 10) {
+      error.password = "Password cannot exceed more than 10 characters";
+    }
+    if (!values.cpassword) {
+      error.cpassword = "Confirm Password is required";
+    } else if (values.cpassword !== values.password) {
+      error.cpassword = "Confirm password and password should be same";
+    }
+    return error;
+  };
 
   const signupHandler = (e) => {
     e.preventDefault();
-    // setFormErrors(validateForm(user));
+    setFormErrors(validateForm(user));
     setIsSubmit(true);
-    // if (!formErrors) {
-    //   setIsSubmit(true);
-    // }
   };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(user);
-      axios.post("http://localhost:5000/api/users/signup", user).then((res) => {
-        alert(res.data.message);
-        navigate("/login", { replace: true });
-      });
+      axios
+        .post("http://localhost:5000/api/users/signup", {
+          name: `${user.name}`,
+          email: user.email,
+          password: user.password,
+        })
+        .then((res) => {
+          alert(res.data.message);
+          navigate("/login", { replace: true });
+        })
+        .catch((error) => {
+          console.error("Error:", error.response.data.message);
+          // Handle error, perhaps set some error state
+        });
     }
-  }, [formErrors]);
+  }, [formErrors, isSubmit, user, navigate]);
+
   return (
     <>
       <div className={registerstyle.register}>
@@ -75,9 +83,9 @@ const Register = () => {
           <h1>Create your account</h1>
           <input
             type="text"
-            name="fname"
-            id="fname"
-            placeholder="First Name"
+            name="name"
+            id="name"
+            placeholder="Name"
             onChange={changeHandler}
             value={user.name}
           />
@@ -109,7 +117,10 @@ const Register = () => {
             value={user.cpassword}
           />
           <p className={basestyle.error}>{formErrors.cpassword}</p>
-          <button className={basestyle.button_common} onClick={signupHandler}>
+          <button
+            className={basestyle.button_common}
+            onClick={signupHandler}
+          >
             Register
           </button>
         </form>
@@ -118,4 +129,5 @@ const Register = () => {
     </>
   );
 };
+
 export default Register;

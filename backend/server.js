@@ -3,6 +3,7 @@ import express from 'express';
 import { dbConnect } from './src/configs/database.config.js';
 import cors from 'cors';
 import userRouter from './src/routers/user.router.js';
+import eventRouter from './src/routers/event.router.js';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRouter);
+app.use("/api/events", eventRouter);
 
 const port = 5000;
 

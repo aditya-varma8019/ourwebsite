@@ -1,48 +1,94 @@
-import React, { useState } from 'react';
-import axios from 'axios'; // Assuming you're using axios for making HTTP requests
+import React, { useState, useEffect } from "react";
+import basestyle from "../../Base.module.css";
+import loginstyle from "./Login.module.css";
+import axios from "axios";
+import { useNavigate, NavLink } from "react-router-dom";
 
-const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+const Login = ({ setUserState }) => {
+    const navigate = useNavigate();
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [user, setUserDetails] = useState({
+        email: "",
+        password: "",
+    });
 
-    const handleLogin = async () => {
-        try {
-            const response = await axios.post('/login', { email, password });
-            console.log(response.data); // Assuming response contains user data upon successful login
-            // You can handle successful login here, such as redirecting to another page
-        } catch (error) {
-            if (error.response.status === 401) {
-                setErrorMessage('Invalid email or password');
-            } else {
-                setErrorMessage('Something went wrong. Please try again later.');
-            }
-        }
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+        setUserDetails({
+            ...user,
+            [name]: value,
+        });
     };
 
+    const validateForm = (values) => {
+        const errors = {};
+        const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        
+        if (!values.email) {
+            errors.email = "Email is required";
+        } else if (!regex.test(values.email)) {
+            errors.email = "Please enter a valid email address";
+        }
+        
+        if (!values.password) {
+            errors.password = "Password is required";
+        }
+        
+        return errors;
+    };
+
+    const loginHandler = (e) => {
+        e.preventDefault();
+        const errors = validateForm(user);
+        setFormErrors(errors);
+        setIsSubmit(true);
+    };
+
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+            axios.post("http://localhost:5000/api/users/login", user)
+                .then((res) => {
+                    alert(res.data.message);
+                    if (res.data.message === "Login successful") {
+                        setUserState(res.data.user);                        
+                    }
+                    navigate("/profile");
+                })
+                .catch((error) => {
+                    console.error("Login failed:", error);
+                    alert("Login failed. Please try again.");
+                });
+        }
+    }, [formErrors, isSubmit, navigate, setUserState, user]);
+
     return (
-        <div>
-            <h2>Login</h2>
-            {errorMessage && <p>{errorMessage}</p>}
+        <div className={loginstyle.login}>
             <form>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button type="button" onClick={handleLogin}>Login</button>
+                <h1>Login</h1>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={changeHandler}
+                    value={user.email}
+                />
+                <p className={basestyle.error}>{formErrors.email}</p>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={changeHandler}
+                    value={user.password}
+                />
+                <p className={basestyle.error}>{formErrors.password}</p>
+                <button className={basestyle.button_common} onClick={loginHandler}>
+                    Login
+                </button>
             </form>
+            <NavLink to="/signup">Not yet registered? Register Now</NavLink>
         </div>
     );
 };
