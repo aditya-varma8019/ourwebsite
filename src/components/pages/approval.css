@@ -105,6 +105,29 @@ code {
 .non-pending {
   margin-top: 50px;
 }
+
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button-container button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #007bff; /* Blue color, you can change it */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
 /* Media query for responsiveness */
 @media screen and (max-width: 768px) {
   .approval-requests-table {

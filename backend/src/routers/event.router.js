@@ -52,7 +52,7 @@ router.post("/create", asyncHandler(async (req, res) => {
 }));
 
 router.put("/update", asyncHandler(async (req, res) => {
-    const { name, venue, description, date, isLateNight, budget, duration, clubName, speakerList, sponsorList,remarks } = req.body;
+    const { name, venue, description, date, isLateNight, budget, duration, clubName, speakerList, sponsorList, remarks } = req.body;
 
     const event = await EventModel.findOne({ name });
     if (!event) {
@@ -74,7 +74,9 @@ router.put("/update", asyncHandler(async (req, res) => {
         numberOfPermissions = 7;
     }
 
-    const updatedEvent = await EventModel.findOneAndUpdate({ name }, { venue, description, date, isLateNight, budget, duration, numberOfPermissions, clubName, speakerList, sponsorList,remarks }, { new: true });
+    const updateFields = { venue, description, date, isLateNight, budget, duration, numberOfPermissions, clubName, speakerList, sponsorList, remarks };
+
+    const updatedEvent = await EventModel.findOneAndUpdate({ name }, updateFields, { new: true });
     res.json(updatedEvent);
 }));
 
@@ -83,6 +85,13 @@ router.put("/update", asyncHandler(async (req, res) => {
 // @access Public
 router.get("/", asyncHandler(async (req, res) => {
     const events = await EventModel.find({});
+    res.json(events);
+}));
+
+router.get("/getByClub/:clubName", asyncHandler(async (req, res) => {
+    const {clubName} = req.params
+    const events = await EventModel.find({ clubName });
+    // console.log(events);
     res.json(events);
 }));
 
