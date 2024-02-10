@@ -6,7 +6,7 @@ const router = Router();
 
 router.post("/create", asyncHandler(async (req, res) => {
 
-    const { name, venue, description, date } = req.body;
+    const { name, venue, description, date, isLateNight, budget, duration } = req.body;
 
     const event = await EventModel.findOne({ name });
     if (event) {
@@ -14,7 +14,7 @@ router.post("/create", asyncHandler(async (req, res) => {
         throw new Error("Event already exists");
     }
 
-    const createdEvent = await EventModel.create({ name, venue, description, date });
+    const createdEvent = await EventModel.create({ name, venue, description, date, isLateNight, budget, duration});
     
     res.status(201).json(createdEvent);
 }));
