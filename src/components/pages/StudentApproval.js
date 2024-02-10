@@ -24,6 +24,14 @@ const StudentRequestsTable = () => {
 
     return (
         <div>
+            <h1 className="dashboard-heading">Student DashBoard</h1>
+
+            <button className="action-button create-request-button">
+                <Link to={"/newevent"}>
+                    Create New Event Approval Request
+                </Link>
+            </button>
+
             <div className="approval-requests-container">
                 {/* Pending requests section */}
                 <div className="approval-requests-table">
@@ -31,7 +39,7 @@ const StudentRequestsTable = () => {
                     <table className="approval-table">
                         <thead>
                             <tr>
-                            <th className="table-header">Name</th>
+                                <th className="table-header">Name</th>
                                 <th className="table-header">Description</th>
                                 <th className="table-header">Date</th>
                                 <th className="table-header">Duration</th>
@@ -45,18 +53,30 @@ const StudentRequestsTable = () => {
                             {approvalRequests.map(request => (
 
                                 <tr key={request.id} className="table-row">
-                                <td className="table-cell">{request.name}</td>
-                                        <td className="table-cell">{request.description}</td>
-                                        <td className="table-cell">{(request.date).substring(0,10)}</td>
-                                        <td className="table-cell">{request.duration}</td>
-                                        <td className="table-cell">{request.venue}</td>
-                                        <td className="table-cell">{request.isLateNight ? 'Yes' : 'No'}</td>
-                                        <td className="table-cell">₹{request.budget}</td>
+                                    <td className="table-cell">{request.name}</td>
+                                    <td className="table-cell">{request.description}</td>
+                                    <td className="table-cell">{(request.date).substring(0, 10)}</td>
+                                    <td className="table-cell">{request.duration}</td>
+                                    <td className="table-cell">{request.venue}</td>
+                                    <td className="table-cell">{request.isLateNight ? 'Yes' : 'No'}</td>
+                                    <td className="table-cell">₹{request.budget}</td>
                                     <td className="table-cell">
                                         {/* <button className="action-button approve-button" onClick={() => handleApprove(request.name)}>Approve</button>
                                         <button className="action-button reject-button" onClick={() => handleReject(request.name)}>Reject</button> */}
 
-                                        <button className="action-button approve-button">{request.isPending ? "Pending" : request.isApproved ? "Approved" : "Rejected"}</button>
+
+
+                                        {request.isPending && (
+                                            <button className="action-button approve-button-blue">{"Pending"}</button>
+                                        )}
+                                        {request.isApproved && (
+                                            <button className="action-button approve-button-green">{"Approved"}</button>
+                                        )}
+                                        {!request.isPending && !request.isApproved && (
+                                            <button className="action-button approve-button-red">{"Rejected"}</button>
+                                        )}
+
+
                                     </td>
                                 </tr>
                             ))}
@@ -99,11 +119,7 @@ const StudentRequestsTable = () => {
                 </table>
             </div> */}
             </div>
-            <button className="action-button create-request-button">
-                <Link to={"/newevent"}>
-                    Create New Event Approval Request
-                </Link>
-            </button>
+
         </div>
     );
 };

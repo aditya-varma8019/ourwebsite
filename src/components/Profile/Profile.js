@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import profilestyle from "./Profile.module.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const EventForm = () => {
+  const navigate = useNavigate();
   const [event, setEvent] = useState({
     name: "",
     venue: "",
@@ -25,22 +27,22 @@ const EventForm = () => {
     e.preventDefault();
     // Handle form submission here, you can send 'event' to backend or perform any other action
     axios.post("http://localhost:5000/api/events/create", {
-          name: event.name,
-          venue: event.venue,
-          description: event.description,
-          date: event.date,
-          isLateNight: event.isLateNight,
-          budget: event.budget,
-          duration: event.duration,
-        })
-        .then((res) => {
-          alert("Successfully created event");
-          // navigate("/login", { replace: true });
-        })
-        .catch((error) => {
-          console.error("Error:", error.response.data.message);
-          // Handle error, perhaps set some error state
-        });
+      name: event.name,
+      venue: event.venue,
+      description: event.description,
+      date: event.date,
+      isLateNight: event.isLateNight,
+      budget: event.budget,
+      duration: event.duration,
+    })
+      .then((res) => {
+        alert("Successfully created event");
+        navigate("/student", { replace: true });
+      })
+      .catch((error) => {
+        console.error("Error:", error.response.data.message);
+        // Handle error, perhaps set some error state
+      });
   };
 
   return (
