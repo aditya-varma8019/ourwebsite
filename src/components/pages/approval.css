@@ -1,0 +1,93 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .grid-title {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .checkbox {
+    margin-bottom: 10px;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .padding {
+    margin-bottom: 20px;
+  }
+  
+  .top-buffer {
+    margin-top: 20px;
+  }
+  
+  .table-responsive {
+    margin-top: 20px;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    color: #333;
+  }
+  
+  .card-text {
+    color: #666;
+  }
+  
+  .btn {
+    border-radius: 5px;
+  }
+  
+  .btn-outline-dark {
+    color: #343a40;
+    border-color: #343a40;
+  }
+  
+  .dropdown-menu {
+    border-radius: 5px;
+  }
+  
+  .dropdown-item {
+    color: #333;
+  }
+  
+  .spinner-border {
+    color: #007bff;
+  }
+  
+  .stamp {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .is-approved {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .is-nope {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
