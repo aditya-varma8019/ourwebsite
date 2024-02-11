@@ -1,13 +1,13 @@
-import React from 'react'
-import Layout from '../Auth/layout'
+import React from 'react';
+import Layout from '../Auth/layout';
+import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    // <div>HomePage</div>
     <Layout>
-    <h1>HomePage</h1>
+      <h1 className='homepage-bg'>HomePage</h1>
     </Layout>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

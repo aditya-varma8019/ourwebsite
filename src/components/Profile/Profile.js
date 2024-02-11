@@ -87,6 +87,7 @@ const EventForm = () => {
         <div>
           <label>Description:</label>
           <textarea
+            className="textarea-label"
             name="description"
             value={event.description}
             onChange={handleChange}
@@ -156,6 +157,7 @@ const EventForm = () => {
          <div>
           <label>Speaker List:</label>
           <textarea
+            className="textarea-label"
             name="speakerList"
             value={event.speakerList}
             onChange={handleChange}
@@ -165,6 +167,7 @@ const EventForm = () => {
         <div>
           <label>Sponsor List:</label>
           <textarea
+            className="textarea-label"
             name="sponsorList"
             value={event.sponsorList}
             onChange={handleChange}
