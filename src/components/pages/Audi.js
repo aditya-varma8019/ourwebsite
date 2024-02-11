@@ -69,7 +69,7 @@ const Audi = () => {
                         </thead>
                         <tbody>
                             {approvalRequests.map(request => (
-                                request.venue==="Auditorium" && request.isPending6 && (
+                                request.isApproved3 && request.venue==="Auditorium" && request.isPending6 && (
                                     <tr key={request.id} className="table-row">
                                         <td className="table-cell name-underline" onClick={()=>navigate(`/eventpage/${request.name}`)}>{request.name}</td>
                                         <td className="table-cell">{request.description}</td>
@@ -118,10 +118,10 @@ const Audi = () => {
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
 
-                                            {request.isApproved && (
+                                            {request.isApproved6 && (
                                                 <button className="action-button approve-button-green">{"Approved"}</button>
                                             )}
-                                            {!request.isPending && !request.isApproved && (
+                                            {!request.isPending6 && !request.isApproved6 && (
                                                 <button className="action-button approve-button-red">{"Rejected"}</button>
                                             )}
 

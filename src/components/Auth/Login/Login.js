@@ -50,6 +50,7 @@ const Login = ({ setUserState }) => {
             axios.post("http://localhost:5000/api/users/login", user)
                 .then((res) => {
                     alert(res.data.message);
+                    localStorage.setItem('user', JSON.stringify(res));
                     if (res.data.message === "Login successful") {
                         setUserState(res.data.user);                        
                     }

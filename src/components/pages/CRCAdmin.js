@@ -69,7 +69,7 @@ const CRCAdmin = () => {
                         </thead>
                         <tbody>
                             {approvalRequests.map(request => (
-                                request.venue==="CRC" && request.isPending5 && (
+                                request.isApproved3 && request.venue==="CRC" && request.isPending5 && (
                                     <tr key={request.id} className="table-row">
                                         <td className="table-cell name-underline" onClick={()=>navigate(`/eventpage/${request.name}`)}>{request.name}</td>
                                         <td className="table-cell">{request.description}</td>
@@ -118,10 +118,10 @@ const CRCAdmin = () => {
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
 
-                                            {request.isApproved && (
+                                            {request.isApproved5 && (
                                                 <button className="action-button approve-button-green">{"Approved"}</button>
                                             )}
-                                            {!request.isPending && !request.isApproved && (
+                                            {!request.isPending5 && !request.isApproved5 && (
                                                 <button className="action-button approve-button-red">{"Rejected"}</button>
                                             )}
 
