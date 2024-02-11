@@ -1,5 +1,4 @@
 import { getClient } from "../configs/mail.config.js";
-
 /**
  * Sends an email receipt for the given order.
  * @param order - The order for which the receipt is being sent.
@@ -50,7 +49,6 @@ const getReceiptHtml = function (vendorObj) {
             <th>Email</th>
             <th>Category</th>
             <th>Item Description</th>
-            <th>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +56,6 @@ const getReceiptHtml = function (vendorObj) {
             <td>${vendorObj.email}</td>
             <td>${vendorObj.category}</td>
             <td>${vendorObj.itemDescription}</td>
-            <td>${vendorObj.price}</td>
           </tr>
         </tbody>
       </table>

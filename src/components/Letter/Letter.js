@@ -7,15 +7,15 @@ import Navbar from './Nav';
 
 const Letter = () => {
   const {
-    company,
+    venue,
     sub,
     isName,
-    username,
+    manager,
     address,
     logo,
     refNo,
-    designation,
-    joiningDate,
+    clubName,
+    eventDate,
     text
   } = useLocation().state;
   
@@ -27,7 +27,7 @@ const Letter = () => {
     let mm = String(today.getMonth() + 1).padStart(2, "0");
     let yyyy = today.getFullYear();
     today = dd + "-" + mm + "-" + yyyy;
-    let pname = username.split(" ").join('-');
+    let pname = manager.split(" ").join('-');
     let filename = pname+'-'+today
       doc.html(document.getElementById("pdf-div"), {
         callback: function (pdf) {
@@ -62,14 +62,14 @@ const Letter = () => {
               />
             </div>
             <div className="col-lg-12 col-md-12 col-sm-12 col-12 d-flex flex-column mt-4 ms-3">
-              <h5>{username}</h5>
+              <h5>{manager}</h5>
               {address && <h6>{address}</h6>}
               {refNo && <h6>Ref No: {refNo}</h6>}
-              {designation && <h6>Designation: {designation}</h6>}
-              {joiningDate && <h6>Joining Date: {joiningDate}</h6>}
+              {clubName && <h6>Club Name: {clubName}</h6>}
+              {eventDate && <h6>Event Date: {eventDate}</h6>}
             </div>
             <div className="col-lg-12 col-md-12 col-sm-12 col-12 d-flex flex-column mt-2 text-center">
-              <h4 className="me-5"><u>{company}</u></h4>
+              <h4 className="me-5"><u>{venue}</u></h4>
             </div>
             <div className="col-lg-12 col-md-12 col-sm-12 col-12 text-center px-5">
               <p className="me-5">
