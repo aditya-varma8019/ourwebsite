@@ -99,7 +99,8 @@ code {
 .reject-button {
   background-color: #dd4c86;
   color: white;
-  margin-left: 5px;
+  margin-right: 7px;
+  margin-top: 5px;
   /* background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%); */
 }
 .non-pending {
@@ -126,6 +127,8 @@ code {
 .button-container button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
+
+
 
 
 /* Media query for responsiveness */

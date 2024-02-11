@@ -118,10 +118,10 @@ const Security = () => {
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
 
-                                            {request.isApproved && (
+                                            {request.isApproved4 && (
                                                 <button className="action-button approve-button-green">{"Approved"}</button>
                                             )}
-                                            {!request.isPending && !request.isApproved && (
+                                            {!request.isPending4 && !request.isApproved4 && (
                                                 <button className="action-button approve-button-red">{"Rejected"}</button>
                                             )}
 

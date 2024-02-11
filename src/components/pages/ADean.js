@@ -118,10 +118,10 @@ const ADean = () => {
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
 
-                                            {request.isApproved && (
+                                            {request.isApproved2 && (
                                                 <button className="action-button approve-button-green">{"Approved"}</button>
                                             )}
-                                            {!request.isPending && !request.isApproved && (
+                                            {!request.isPending2 && !request.isApproved2 && (
                                                 <button className="action-button approve-button-red">{"Rejected"}</button>
                                             )}
 

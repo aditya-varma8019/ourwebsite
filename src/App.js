@@ -21,13 +21,17 @@ import DisplayAllEvents from './Display/DisplayAllEvents';
 import VendorForm from './components/Vendor/Vendor';
 import Header from './components/Auth/header';
 import Footer from './components/Auth/footer';
+import CG1 from './components/CG1';
 function App() {
   return (
     <div>
       <Header />
+
+     
+      
       <Routes>
 
-        <Route path="/" element={<HomePage />} /><Route path="/login" element={<Login />} />
+       <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/newevent" element={<Profile />} />
@@ -47,6 +51,7 @@ function App() {
         <Route path='/eventsummary' element={<EventSummaryForm />} />
         <Route path='/display-summary' element={<DisplayAllEvents />} />
         <Route path='/vendor' element={<VendorForm />} />
+        <Route path='/certificate' element={<CG1 />} />
         {/* <Route path='/' element={</>} /> */}
       </Routes>
       <Footer />

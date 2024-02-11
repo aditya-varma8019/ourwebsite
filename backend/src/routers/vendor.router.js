@@ -1,23 +1,27 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
-import { VendorModel } from "../models/vendor.model";
+import { VendorModel } from "../models/vendor.model.js";
+import { sendEmailReceipt } from "../helpers/mail.helper.js";
 
 const router = Router();
 
 router.post("/create", asyncHandler(async (req, res) => {
     
-        const { name, email, category } = req.body;
+        const { email, category, itemDescription, price } = req.body;
     
-        const vendor = await VendorModel.findOne({ email: email });
+        const vendorObj = {
+            email,
+            category,
+            itemDescription,
+            price
+        };
 
-        if(vendor){
-            res.status(400);
-            throw new Error("Vendor already exists");
-        }
+        sendEmailReceipt(vendorObj);
 
-        const createdVendor = await VendorModel.create({ name, email, category });
-        res.status(201).json({
-            message: "Vendor created successfully",
-            vendor: createdVendor,
-        });
+        // const vendor = new VendorModel(vendorObj);
+        
+        // await vendor.save()
+        // res.status(201).send(vendor);
 }))
+
+export default router;

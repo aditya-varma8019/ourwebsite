@@ -1,56 +1,10 @@
-/* singleReq.css */
-
-/* Style for the container of the SingleRequest component */
-.single-request-container {
-  padding: 20px;
-  margin-bottom: 570px;
-}
-
-/* Style for the progress bar wrapper */
-.progress-bar {
-  margin-bottom: 20px;
-}
-.name-underline{
-  text-decoration: underline;
-  font-weight: bold;
-  cursor: pointer;
-}
-/* Style for the progress bar */
-.progress-bar-inner {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  height: 30px;
-  overflow: hidden;
-}
-
-/* Style for the progress bar steps */
-.progress-step {
-  flex: 1;
-  text-align: center;
-  line-height: 30px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007bff;
-}
-
-/* Additional styling for the div */
-.security-crc-container {
-  margin-top: 10px;
-}
-
-/* Additional styling for the paragraphs */
-.security-crc-container p {
-  margin-bottom: 5px;
-}
-
 .single-request-container {
   margin-top: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f9f9f9;
+  margin-bottom:400px ;
 }
 
 .approval-status {
@@ -58,16 +12,55 @@
   font-size: 16px;
 }
 
-.checkmark, .cross {
+.checkmark,
+.cross {
   font-size: 20px;
   margin-left: 10px;
 }
 
 .checkmark {
-  color: #4CAF50; /* Green color */
+  color: #4caf50; /* Green color */
 }
 
 .cross {
   color: #f44336; /* Red color */
 }
 
+.status-bar {
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 90px;
+  margin-right: 90px;
+}
+
+.text-status-bar {
+  margin-top: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom:10px ;
+}
+
+
+.status-bar-inner {
+  height: 100%;
+  background-color: #007bff;
+}
+
+
+.centered-box {
+  display: flex;
+  justify-content: center;
+}
+
+.security-crc-container {
+  margin-top: 10px;
+}
+
+.security-crc-container p {
+  margin-bottom: 5px;
+}
