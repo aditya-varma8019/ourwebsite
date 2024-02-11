@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import './EventDetails.css'; // Import CSS file
 const EventDetails = () => {
     const { name } = useParams(); // Get the parameter from the URL
@@ -43,9 +43,10 @@ const EventDetails = () => {
                 ) : (
                     <p className="loading-message">Loading event details...</p>
                 )}
-                {eventDetails && eventDetails.isPending1 ? (<button onClick={()=>navigate
+                {eventDetails && (eventDetails.isPending1 || eventDetails.isPending2 || eventDetails.isPending3 || eventDetails.isPending4) ? (<button onClick={()=>navigate
 
                 (`/edit/${eventDetails.name}`)}>edit</button>):(<p>Already Processed</p>)}
+                {eventDetails && eventDetails.isCompleted && <Link to={"/eventsummary"}>Add Summary</Link>}
             </div>
         </div>
     );

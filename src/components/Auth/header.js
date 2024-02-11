@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink, Link } from "react-router-dom";
+import "./Header.css";
 const Header = () => {
   return (
     // <div>Header</div>
@@ -19,8 +20,8 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <Link to="/" className="navbar-brand">
-              😎
-             Hackathon Event Approval
+              🧑🏾‍💻
+             Student Activity Event Approval
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               
@@ -29,7 +30,7 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item dropdown">
+              {/* <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to={"/categories"}  data-bs-toggle="dropdown" >
                 Events
               </Link>
@@ -40,7 +41,7 @@ const Header = () => {
              
               </ul>
 
-            </li>
+            </li> */}
                 <>
                   <li className="nav-item">
                     <NavLink to="/signup" className="nav-link">

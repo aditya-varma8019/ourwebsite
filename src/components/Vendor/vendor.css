@@ -1,0 +1,59 @@
+/* vendorForm.css */
+
+/* Container styles */
+.vendor-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+  }
+  
+  /* Heading styles */
+  .vendor-form-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Form input styles */
+  .vendor-form-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .vendor-form-container input[type="text"],
+  .vendor-form-container input[type="email"],
+  .vendor-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .vendor-form-container textarea {
+    resize: vertical;
+  }
+  
+  /* Submit button styles */
+  .vendor-form-container button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .vendor-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  

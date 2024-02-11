@@ -8,6 +8,8 @@
     align-items: center;
     text-align: center;
     margin: auto;
+    margin-top: 7%;
+    margin-bottom: 15%;
 }
 
 .login > form input {

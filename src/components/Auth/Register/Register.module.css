@@ -8,6 +8,8 @@
     align-items: center;
     text-align: center;
     margin: auto;
+    margin-top: 125px;
+    margin-bottom: 200px;
 }
 
 .register > form input {
