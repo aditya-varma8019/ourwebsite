@@ -17,23 +17,23 @@ const Home = () => {
   const navigate=useNavigate();
 
 
-  const [company, setCompany] = useState("");
+  const [venue, setVenue] = useState("");
   const [text,setText] =useState("");
   const [sub,setSub] = useState("");
   const [isName, setIsName] = useState("");
-  const [username, setUsername] = useState("");
+  const [manager, setManager] = useState("");
   const [address, setAddress] = useState("");
   const [refNo,setRefNo]=useState("");
-  const [designation,setDesignation]=useState("");
-  const [joiningDate,setJoiningDate]=useState("");
+  const [clubName,setClubName]=useState("");
+  const [eventDate,setEventDate]=useState("");
   const [logo,setLogo]=useState("https://rusutikaa.github.io/docs/developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Art/defaultphoto_2x.png");
 
   const submitDetails=(e)=>{
       e.preventDefault();
-    if(!company.trim()||!sub.trim()||logo==="https://rusutikaa.github.io/docs/developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Art/defaultphoto_2x.png"  || !text.trim() || !username.trim())
-    alert("Subject, Company, letter body, Logo, Employee Name are required!");
+    if(!venue.trim()||!sub.trim()||logo==="https://rusutikaa.github.io/docs/developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Art/defaultphoto_2x.png"  || !text.trim() || !manager.trim())
+    alert("Subject, venue, letter body, Logo, Employee Name are required!");
     else{
-      navigate('/generateletter',{state:{company,sub,isName,username,address,logo,refNo,designation,joiningDate,text}});
+      navigate('/generateletter',{state:{venue,sub,isName,manager,address,logo,refNo,clubName,eventDate,text}});
     }
   }
 
@@ -138,7 +138,7 @@ const Home = () => {
               noValidate
               autoComplete="off"
             >
-              <TextField id="standard-basic" label="Company Name" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={company} onChange={(e) => setCompany(e.target.value)} />
+              <TextField id="standard-basic" label="Venue" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={venue} onChange={(e) => setVenue(e.target.value)} />
             </Box>
 
 
@@ -152,7 +152,7 @@ const Home = () => {
               noValidate
               autoComplete="off"
             >
-              <TextField id="standard-basic" label="Employee Name" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <TextField id="standard-basic" label="Manager's Name" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={manager} onChange={(e) => setManager(e.target.value)} />
             </Box>
             <Box
               component="form"
@@ -162,7 +162,7 @@ const Home = () => {
               noValidate
               autoComplete="off"
             >
-              <TextField id="standard-basic" label="Address" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={address} onChange={(e) => setAddress(e.target.value)} />
+              {/* <TextField id="standard-basic" label="Address" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={address} onChange={(e) => setAddress(e.target.value)} />
             </Box>
             <Box
               component="form"
@@ -171,8 +171,8 @@ const Home = () => {
               }}
               noValidate
               autoComplete="off"
-            >
-              <TextField id="standard-basic" label="Reference No." InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={refNo} onChange={(e) => setRefNo(e.target.value)} />
+            > */}
+              {/* <TextField id="standard-basic" label="Reference No." InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={refNo} onChange={(e) => setRefNo(e.target.value)} />
             </Box>
             <Box
               component="form"
@@ -181,8 +181,8 @@ const Home = () => {
               }}
               noValidate
               autoComplete="off"
-            >
-              <TextField id="standard-basic" label="Designation" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={designation} onChange={(e) => setDesignation(e.target.value)} />
+            > */}
+              <TextField id="standard-basic" label="Club Name" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={clubName} onChange={(e) => setClubName(e.target.value)} />
             </Box>
             <Box
               component="form"
@@ -192,7 +192,7 @@ const Home = () => {
               noValidate
               autoComplete="off"
             >
-              <TextField id="standard-basic" label="Joining Date" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={joiningDate} onChange={(e) => setJoiningDate(e.target.value)} />
+              <TextField id="standard-basic" label="Event Date" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
             </Box>
 
             <Box
@@ -203,7 +203,7 @@ const Home = () => {
               noValidate
               autoComplete="off"
             >
-              <TextField id="standard-basic" label="Issuer Name" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={isName} onChange={(e) => setIsName(e.target.value)} />
+              <TextField id="standard-basic" label="Faculty Incharge's Name" InputLabelProps={{style: {fontWeight:'bold'}}} variant="standard" value={isName} onChange={(e) => setIsName(e.target.value)} />
             </Box>
 
 

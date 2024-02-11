@@ -49,7 +49,7 @@ const Security = () => {
 
     return (
         <div>
-            <h1 className="dashboard-heading">Faculty DashBoard</h1>
+            <h1 className="dashboard-heading">Security DashBoard</h1>
             <div className="approval-requests-container">
                 {/* Pending requests section */}
                 <div className="approval-requests-table">

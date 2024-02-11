@@ -1,0 +1,29 @@
+/* EventSummaryDisplay.module.css */
+
+/* Container styles */
+.summary-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styles */
+  .summary-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Item styles */
+  .summary-item {
+    margin-bottom: 10px;
+  }
+  
+  /* Photo styles */
+  .photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-left: 10px;
+  }
+  

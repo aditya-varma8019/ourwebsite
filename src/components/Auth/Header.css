@@ -1,0 +1,164 @@
+/* Navbar */
+body{
+  margin: 0;
+}
+.navbar {
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(226,235,220,1) 0%, rgba(0,212,255,1) 100%); /* Change to desired background color */
+font-family: 'Open Sans', sans-serif;
+font-size: 25px;
+width:100%;
+height: 30px;
+/* position: fixed; */
+/* margin-bottom: 150px; */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #000; /* Change to desired text color */
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path></svg>'); /* Change to desired icon */
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.nav-item {
+  margin-left: 15px; /* Adjust as needed */
+}
+
+.nav-link {
+  color: #000; /* Change to desired text color */
+}
+
+/* Dropdown */
+.dropdown-menu {
+  background-color: #f8f9fa; /* Change to desired background color */
+}
+
+.dropdown-item {
+  color: #000; /* Change to desired text color */
+}
+
+/* Additional Styling */
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.nav-link:hover,
+.dropdown-item:hover {
+  color: #007bff; /* Change to desired hover color */
+}
+/* header.css */
+
+.navbar {
+  background-color: #f0f0f0; /* Background color for the navbar */
+  padding: 40px; /* Padding for the navbar */
+}
+
+.navbar-brand {
+  font-size: 24px; /* Font size for the brand */
+  font-weight: bold; /* Font weight for the brand */
+  color: #333; /* Text color for the brand */
+  text-decoration: none; /* Remove underline */
+}
+
+.nav-link {
+  color: #333; /* Text color for the links */
+  text-decoration: none; /* Remove underline */
+}
+
+.nav-link:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+.dropdown-menu {
+  display: none; /* Hide dropdown menu by default */
+  position: absolute; /* Position the dropdown menu */
+  background-color: #fff; /* Background color for the dropdown menu */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add box shadow */
+}
+
+.dropdown-item {
+  color: #333; /* Text color for dropdown items */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Display items as blocks */
+  padding: 10px; /* Padding for dropdown items */
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0; /* Background color on hover */
+}
+
+.navbar-toggler {
+  background-color: transparent; /* Transparent background for toggler */
+  border: none; /* Remove border */
+  cursor: pointer; /* Add pointer cursor */
+}
+/* header.css */
+
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+nav > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+nav > div > div {
+  display: flex;
+  align-items: center;
+}
+
+nav > div > div a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+nav > div > div a:hover {
+  text-decoration: underline;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  background-color: #333;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li:hover > ul {
+  display: block;
+}
+
+nav ul ul li {
+  width: 100%;
+}
+
+.active {
+  font-weight: bold;
+}
