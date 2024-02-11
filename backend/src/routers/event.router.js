@@ -30,23 +30,27 @@ router.post("/create", asyncHandler(async (req, res) => {
     }
     
     dbVenue.bookedFor.push(date);
-    await dbVenue.save();    
+    await dbVenue.save();   
+    
+    
 
     let numberOfPermissions = 3;
-    if(!isLateNight && venue === "CRC"){
+    if(isLateNight === "no" && venue === "CRC"){
         numberOfPermissions = 4;
     }
-    else if(!isLateNight && venue === "Auditorium"){
+    else if(isLateNight === "no" && venue === "Auditorium"){
         numberOfPermissions = 5;
     }
-    else if(isLateNight && venue === "CRC"){
+    else if(isLateNight === "yes" && venue === "CRC"){
         numberOfPermissions = 6;
     }
-    else if(isLateNight && venue === "Auditorium"){
+    else if(isLateNight === "yes" && venue === "Auditorium"){
         numberOfPermissions = 7;
     }
 
-    const createdEvent = await EventModel.create({ name, venue, description, date, isLateNight, budget, duration, numberOfPermissions, clubName, speakerList, sponsorList});
+    const createFields = { name, venue, description, date, isLateNight, budget, duration, numberOfPermissions, clubName, speakerList, sponsorList};
+
+    const createdEvent = await EventModel.create(createFields);
     
     res.status(201).json(createdEvent);
 }));
@@ -59,6 +63,8 @@ router.put("/update", asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Event does not exist");
     }
+
+    console.log(isLateNight, venue);
 
     let numberOfPermissions = 3;
     if(!isLateNight && venue === "CRC"){

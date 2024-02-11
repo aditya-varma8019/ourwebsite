@@ -5,6 +5,7 @@ import cors from 'cors';
 import userRouter from './src/routers/user.router.js';
 import eventRouter from './src/routers/event.router.js';
 import uploadRouter from './src/routers/upload.router.js';
+import vendorRoute from './src/routers/vendor.router.js';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
 app.use("/api/upload", uploadRouter);
+app.use("/api/vendor", vendorRoute);
 
 const port = 5000;
 

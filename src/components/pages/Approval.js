@@ -99,6 +99,7 @@ const ApprovalRequestsTable = () => {
                                         <td className="table-cell">₹{request.budget}</td>
                                         <td className="table-cell">
                                             <button className="action-button approve-button" onClick={() => handleApprove(request.name)}>Approve</button>
+                                            
                                             <button className="action-button reject-button" onClick={() => handleReject(request.name)}>Reject</button>
                                         </td>
                                     </tr>

@@ -27,28 +27,32 @@ const SingleRequest = () => {
   }, [name, approvals]); // Make sure to re-fetch when the name parameter changes
 
   // Move the setter function outside of useEffect
-useEffect(() => {
-  const setter = () => {
-    if (event && event.numberOfPermissions) {
-      if (event.numberOfPermissions === 3) {
-        setApprovals([1, 2, 3]);
-      } else if (event.numberOfPermissions === 4) {
-        setApprovals([1, 2, 3, 5]);
-      } else if (event.numberOfPermissions === 5) {
-        setApprovals([1, 2, 3, 6]);
-      } else if (event.numberOfPermissions === 6) {
-        setApprovals([1, 2, 3, 4, 5]);
-      } else if (event.numberOfPermissions === 7) {
-        setApprovals([1, 2, 3, 4, 6]);
+  useEffect(() => {
+    const setter = () => {
+      if (event && event.numberOfPermissions) {
+        if (event.numberOfPermissions === 3) {
+          setApprovals([1, 2, 3]);
+        } else if (event.numberOfPermissions === 4) {
+          setApprovals([1, 2, 3, 5]);
+        } else if (event.numberOfPermissions === 5) {
+          setApprovals([1, 2, 3, 6]);
+        } else if (event.numberOfPermissions === 6) {
+          setApprovals([1, 2, 3, 4, 5]);
+        } else if (event.numberOfPermissions === 7) {
+          setApprovals([1, 2, 3, 4, 6]);
+        }
       }
-    }
-  };
+    };
 
-  setter(); // Call the setter function when event changes
-}, [event]);
+    setter(); // Call the setter function when event changes
+  }, [event]);
+
+  // Calculate count of approved events
+  const approvedCount = approvals.filter((i) => event[`isApproved${i}`]).length;
 
   return (
     <>
+        <h2>{name}</h2>
       {event && (
         <div className="single-request-container">
           <p className="approval-status">
@@ -108,6 +112,14 @@ useEffect(() => {
               </p>
             </div>
           )}
+          {/* Status bar representing count/total of approved events */}
+          <div className="status-bar">
+            {/* Status bar to indicate approval progress */}
+            <div
+              className="status-bar-inner"
+              style={{ width: `${(approvedCount / event.numberOfPermissions) * 100}%` }}
+            />
+          </div>
         </div>
       )}
     </>
